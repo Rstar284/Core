@@ -48,7 +48,7 @@ export function tokenizer(input = "") {
         }
 
         else if (now === "'") {
-            const val = "";
+            let val = "";
             
             while ((now = input[++count]) !== "'") {
                 val += now;
