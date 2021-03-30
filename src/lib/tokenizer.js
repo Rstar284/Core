@@ -10,7 +10,7 @@ import {
 } from "./syntax.js";
 
 // Export the 'tokenizer' function
-export function tokenizer(input = "") {
+export function tokenizer(input = "") { 
     // Define the variables
     let count, result, tokens;
     
@@ -35,6 +35,50 @@ export function tokenizer(input = "") {
             continue;
         } else if (now === "-") {
             tokens.push({ type: "minus", value: "-" });
+            count++;
+            continue;
+        } else if (now === "!") {
+            tokens.push({ type: "not", value: "!" });
+            count++;
+            continue;
+        } else if (now === "$") {
+            tokens.push({ type: "dollar", value: "$" });
+            count++;
+            continue;
+        } else if (now === "%") {
+            tokens.push({ type: "percent", value: "%" });
+            count++;
+            continue;
+        } else if (now === "|") {
+            tokens.push({ type: "pipe", value: "|" });
+            count++;
+            continue;
+        } else if (now === "<") {
+            tokens.push({ type: "less", value: "<" });
+            count++;
+            continue;
+        } else if (now === ">") {
+            tokens.push({ type: "great", value: ">" });
+            count++;
+            continue;
+        } else if (now === "&") {
+            tokens.push({ type: "and", value: "&" });
+            count++;
+            continue;
+        } else if (now === "=") {
+            tokens.push({ type: "equal", value: "=" });
+            count++;
+            continue;
+        } else if (now === "[" || now === "]") {
+            tokens.push({ type: "bracket", value: now });
+            count++;
+            continue;
+        } else if (now === "(" || now === ")") {
+            tokens.push({ type: "paran", value: now });
+            count++;
+            continue;
+        } else if (now === "{" || now === "}") {
+            tokens.push({ type: "curly", value: now });
             count++;
             continue;
         } else if (now === "#") {
