@@ -43,7 +43,7 @@ export function tokenizer(input = "") {
         // We will use 'now' as the current character
         let now = input[count];
         
-        if (types.includes(now)){
+        if (now in types){
             tokens.push({ type: types[now], value: now })
         }
 
