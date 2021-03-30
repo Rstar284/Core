@@ -48,16 +48,15 @@ export function tokenizer(input = "") {
         }
 
         else if (now === "'") {
-            const val = [];
+            const val = "";
             
             while ((now = input[++count]) !== "'") {
-                val.push(now);
+                val += now;
             };
             
             now = input[++count];
             
-            tokens.push({ type: "string", value: val.join("") });
-            continue;
+            tokens.push({ type: "string", value: val });
         } else if (now === '"') {
             const val = [];
             now = input[++count];
