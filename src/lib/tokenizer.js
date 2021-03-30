@@ -67,14 +67,12 @@ export function tokenizer(input = "") {
             now = input[++count];
             
             tokens.push({ type: "string", value: val });
-            continue;
         } else if (now === "#") {
             while (count < input.length && !NEWLINE.test(input[count])) {
                 count++;
             };
         } else if (NEWLINE.test(now) || WHITESPACE.test(now)) {
             count++;
-            continue;
         } else if (NUMBER.test(now)) {
             const val = [];
             
@@ -97,7 +95,6 @@ export function tokenizer(input = "") {
             };
             
             tokens.push({ type: "name", value: val });
-            continue;
         } else {
             throw new Error("'" + now + "' is not a recognized token");
         }
