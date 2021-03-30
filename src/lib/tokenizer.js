@@ -49,11 +49,9 @@ export function tokenizer(input = "") {
 
         else if (now === "'") {
             const val = [];
-            now = input[++count];
             
-            while (now !== "'") {
+            while ((now = input[++count]) !== "'") {
                 val.push(now);
-                now = input[++count];
             };
             
             now = input[++count];
@@ -65,7 +63,6 @@ export function tokenizer(input = "") {
             now = input[++count];
             
             while (now !== '"') {
-                val.push(now);
                 now = input[++count];
             };
             
