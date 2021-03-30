@@ -1,3 +1,5 @@
+/* syntax.js */
+
 // RegExp or 'syntax' for later use
 export const NEWLINE = /\n/;
 export const NUMBER = /[0-9]/;
