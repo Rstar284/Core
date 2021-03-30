@@ -58,16 +58,15 @@ export function tokenizer(input = "") {
             
             tokens.push({ type: "string", value: val });
         } else if (now === '"') {
-            const val = [];
-            now = input[++count];
+            let val = "";
             
-            while (now !== '"') {
-                now = input[++count];
+            while ((now = input[++count]) !== '"') {
+                val += now;
             };
             
             now = input[++count];
             
-            tokens.push({ type: "string", value: val.join("") });
+            tokens.push({ type: "string", value: val });
             continue;
         } else if (now === "#") {
             while (count < input.length && !NEWLINE.test(input[count])) {
