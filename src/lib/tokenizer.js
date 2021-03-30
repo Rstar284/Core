@@ -22,7 +22,7 @@ export function tokenizer(input = "") {
     //Loop over the input string one by one
     while (count < input.length) {
         // We will use 'now' as the current character
-        const now = input[count];
+        let now = input[count];
         
         // We will check what 'now' is currently
         if (now === "+") {
@@ -81,6 +81,32 @@ export function tokenizer(input = "") {
             tokens.push({ type: "curly", value: now });
             count++;
             continue;
+        } else if (now === "'") {
+            const val = [];
+            now = input[++count];
+            
+            while (now !== "'") {
+                val.push(now);
+                now = input[++count];
+            };
+            
+            now = input[++count];
+            
+            tokens.push({ type: "string", value: val.join("") });
+            continue;
+        } else if (now === '"') {
+            const val = [];
+            now = input[++count];
+            
+            while (now !== '"') {
+                val.push(now);
+                now = input[++count];
+            };
+            
+            now = input[++count];
+            
+            tokens.push({ type: "string", value: val.join("") });
+            continue;
         } else if (now === "#") {
             while (count < input.length && !NEWLINE.test(input[count])) {
                 count++;
@@ -88,7 +114,32 @@ export function tokenizer(input = "") {
         } else if (NEWLINE.test(now) || WHITESPACE.test(now)) {
             count++;
             continue;
-        };
+        } else if (NUMBER.test(now)) {
+            const val = [];
+            
+            while (NUMBER.test(now)) {
+                val.push(now)
+                now = input[++count];
+            };
+            
+            tokens.push({ type: "number", value: val.join("") });
+        } else if (LETTER.test(now) || now === "_") {
+            let val = now;
+            
+            if (++count < input.length) {
+                now = input[count];
+                
+                while ((LETTER.test(now) || NUMBER.test(now) || now === "_") && (count + 1 <= input.length)) {
+                    val += now;
+                    now = input[++count];
+                };
+            };
+            
+            tokens.push({ type: "name", value: val });
+            continue;
+        } else {
+            throw new Error("'" + now + "' is not a recognized token");
+        }
     };
     
     result.input = input;         // Input: String
