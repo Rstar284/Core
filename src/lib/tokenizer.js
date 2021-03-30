@@ -18,70 +18,36 @@ export function tokenizer(input = "") {
     count = 0;
     result = {};
     tokens = [];
+
+    let types = {
+        "+": "plus",
+        "*": "star",
+        "-": "minus",
+        "!": "not",
+        "$": "dollar",
+        "%": "percent",
+        "|": "pipe",
+        "<": "less",
+        ">": "great",
+        "&": "and",
+        "[": "bracket",
+        "]": "bracket",
+        "(": "paran",
+        ")": "paran",
+        "{": "curly",
+        "}": "curly"
+    }
     
     //Loop over the input string one by one
     while (count < input.length) {
         // We will use 'now' as the current character
         let now = input[count];
         
-        // We will check what 'now' is currently
-        if (now === "+") {
-            tokens.push({ type: "plus", value: "+" });
-            count++;
-            continue;
-        } else if (now === "*") {
-            tokens.push({ type: "star", value: "*" });
-            count++;
-            continue;
-        } else if (now === "-") {
-            tokens.push({ type: "minus", value: "-" });
-            count++;
-            continue;
-        } else if (now === "!") {
-            tokens.push({ type: "not", value: "!" });
-            count++;
-            continue;
-        } else if (now === "$") {
-            tokens.push({ type: "dollar", value: "$" });
-            count++;
-            continue;
-        } else if (now === "%") {
-            tokens.push({ type: "percent", value: "%" });
-            count++;
-            continue;
-        } else if (now === "|") {
-            tokens.push({ type: "pipe", value: "|" });
-            count++;
-            continue;
-        } else if (now === "<") {
-            tokens.push({ type: "less", value: "<" });
-            count++;
-            continue;
-        } else if (now === ">") {
-            tokens.push({ type: "great", value: ">" });
-            count++;
-            continue;
-        } else if (now === "&") {
-            tokens.push({ type: "and", value: "&" });
-            count++;
-            continue;
-        } else if (now === "=") {
-            tokens.push({ type: "equal", value: "=" });
-            count++;
-            continue;
-        } else if (now === "[" || now === "]") {
-            tokens.push({ type: "bracket", value: now });
-            count++;
-            continue;
-        } else if (now === "(" || now === ")") {
-            tokens.push({ type: "paran", value: now });
-            count++;
-            continue;
-        } else if (now === "{" || now === "}") {
-            tokens.push({ type: "curly", value: now });
-            count++;
-            continue;
-        } else if (now === "'") {
+        if (types.includes(now)){
+            tokens.push({ type: types[now], value: now })
+        }
+
+        else if (now === "'") {
             const val = [];
             now = input[++count];
             
